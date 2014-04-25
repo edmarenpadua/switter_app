@@ -1,0 +1,21 @@
+%h1 Listing swits
+
+%table
+  %tr
+    %th Content
+    %th User
+    %th
+    %th
+    %th
+
+  - @swits.each do |swit|
+    %tr
+      %td= swit.content
+      %td= swit.user_id
+      %td= link_to 'Show', swit
+      %td= link_to 'Edit', edit_swit_path(swit)
+      %td= link_to 'Destroy', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'Post a Swit', new_swit_path

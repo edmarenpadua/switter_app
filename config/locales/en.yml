@@ -21,3 +21,15 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    attributes:
+      swit:
+        content: ""
+    errors:
+      models:
+        swit:
+          attributes:
+            content:
+              blank: "You cannot post an empty swit."
+              too_long: "Maximum of 140 chars only."

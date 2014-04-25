@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Content:
+  = @swit.content
+%p
+  %b User:
+  = @swit.user_id
+
+= link_to 'Edit', edit_swit_path(@swit)
+\|
+= link_to 'Back', swits_path
