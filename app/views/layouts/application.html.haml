@@ -3,18 +3,28 @@
   %head
     %meta{charset: "utf-8"}/
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
-    %title= content_for?(:title) ? yield(:title) : "Switter"
+    %title= content_for?(:title) ? yield(:title) : ".::Switter | Home::."
     = stylesheet_link_tag    "application"
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tags
   %body
     = render 'layouts/header'
     %div{id: "contain"}
-      .row
-        = render 'layouts/sideBar'
-        .large-8.columns
-          = render 'layouts/mainFeed'
-        = render 'layouts/doorTagsFeed'
-      = render 'layouts/footer'
+      .row.large-7.columns
+        %h1 Switter.
+        %h4 Life is full of flavors.
+      .row.large-5.columns
+        %h1 Sign Up
+        = render 'users/form'
+
+
+    /  .row
+    /    = render @users.new
+    /  .row
+    /    = render 'layouts/sideBar'
+    /    .large-8.columns
+    /      = render 'layouts/mainFeed'
+    /    = render 'layouts/doorTagsFeed'
+    = render 'layouts/footer'
     = yield
     = javascript_include_tag "application"

@@ -1,8 +1,8 @@
 SwitterApp::Application.routes.draw do
-  get "static_pages/home"
   resources :swits
   resources :users
 
+  match '/',  to: 'users#new',            via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
