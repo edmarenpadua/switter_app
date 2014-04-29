@@ -10,21 +10,11 @@
   %body
     = render 'layouts/header'
     %div{id: "contain"}
-      .row.large-7.columns
-        %h1 Switter.
-        %h4 Life is full of flavors.
-      .row.large-5.columns
-        %h1 Sign Up
-        = render 'users/form'
-
-
-    /  .row
-    /    = render @users.new
-    /  .row
-    /    = render 'layouts/sideBar'
-    /    .large-8.columns
-    /      = render 'layouts/mainFeed'
-    /    = render 'layouts/doorTagsFeed'
+      - flash.each do |key, value|
+        %div{class: "alert alert-#{key}"}= value
+      -if signed_in?
+        = yield :logged_in
+      -else
+        = yield :index
     = render 'layouts/footer'
-    = yield
     = javascript_include_tag "application"

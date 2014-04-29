@@ -1,16 +1,18 @@
 = form_for @user do |f|
   - if @user.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %h2= "The form contains #{pluralize(@user.errors.count, "error")}"
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :Username
+  .field.small-9
+    = f.label :username, "Username"
     = f.text_field :username
-  .field
-    = f.label :Password
+  .field.small-9
+    = f.label :password, "Password"
     = f.password_field :password
+  .field.small-9
+    = f.label :password_confirmation, "Retype password"
+    = f.password_field :password_confirmation
   .actions
-    = f.submit 'Save'
+    = f.submit 'Sign up', class: "button success small radius center right" 

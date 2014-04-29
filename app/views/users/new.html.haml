@@ -1,1 +1,34 @@
+- content_for :index do
+	.row.large-7.columns
+		%h1 Switter.
+		%h4 Life is full of flavors.
+	.row.large-5.columns
+		%h1 Sign Up
+		= render 'users/form'
 
+- content_for :header_index do
+	= form_for(:session, url: sessions_path) do |f|
+		%ul.inline-list.right
+			%li
+				= f.label :username, "Username"
+				= f.text_field :username
+			%li
+				= f.label :password, "Password"
+				= f.password_field :password, class: "small-3 columns"
+			%li
+				.actions
+					= f.submit 'Sign in', class: "button tiny radius center right"
+
+- content_for :logged_in do
+	.row
+	= render 'layouts/sideBar'
+	.large-8.columns
+		= render 'layouts/mainFeed'
+	= render 'layouts/doorTagsFeed'
+
+- content_for :header_logged_in do
+	%ul.inline-list.right
+		%li
+			Account Settings
+		%li
+			Log out
