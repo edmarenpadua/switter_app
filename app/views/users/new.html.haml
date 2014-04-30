@@ -22,8 +22,7 @@
 - content_for :logged_in do
 	.row
 	= render 'layouts/sideBar'
-	.large-8.columns
-		= render 'layouts/mainFeed'
+	= render 'layouts/mainFeed'
 	= render 'layouts/doorTagsFeed'
 
 - content_for :header_logged_in do
@@ -31,4 +30,7 @@
 		%li
 			Account Settings
 		%li
-			Log out
+			= link_to "Log out", signout_path, method: "delete"
+
+- content_for :feed do
+	%heellloo

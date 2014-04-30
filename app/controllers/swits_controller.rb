@@ -28,7 +28,7 @@ class SwitsController < ApplicationController
 
     respond_to do |format|
       if @swit.save
-        format.html { redirect_to @swit, notice: 'Swit was successfully created.' }
+        format.html { redirect_to :root, notice: 'Swit was successfully created.' }
         format.json { render action: 'show', status: :created, location: @swit }
       else
         format.html { render action: 'new' }

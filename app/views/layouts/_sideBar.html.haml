@@ -1,25 +1,25 @@
-.large-2.columns
+.large-3.columns
   .panel
     %a{href: "#"}
-      %img{src: "http://placehold.it/300x240&text=[img]"}/
+      %img{src: "http://placehold.it/100x100&text=[img]"}/
     %h5
-      %a{href: "#"} Mayen!
-    .section-container.vertical-nav{"data-options" => "deep_linking: false; one_up: true", "data-section" => ""}
-      %section.section
-        %h5.title
-          %a{href: "#"} Link 1
-      %section.section
-        %h5.title
-          %a{href: "#"} Link 2
-      %section.section
-        %h5.title
-          %a{href: "#"} Link 3
-      %section.section
-        %h5.title
-          %a{href: "#"} Link 4
-      %section.section
-        %h5.title
-          %a{href: "#"} Link 5
-      %section.section
-        %h5.title
-          %a{href: "#"} Link 6
+      %b
+        -if signed_in?
+          = current_user.username
+    %br
+    %h6 Post a Swit:
+    -@swit = Swit.new
+    = form_for @swit do |f|
+      - if @swit.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@swit.errors.count, "error")} prohibited this swit from being saved:"
+          %ul
+            - @swit.errors.full_messages.each do |msg|
+              %li= msg
+      -if signed_in?
+        .field
+          = f.text_area :content
+        .field
+          = f.hidden_field :user_id, value: current_user.id
+        .actions
+          = f.submit 'Save'

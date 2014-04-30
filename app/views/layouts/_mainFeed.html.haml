@@ -1,26 +1,68 @@
-.row
-  .large-2.columns.small-3
-    %img{src: "http://placehold.it/80x80&text=[img]"}/
-  .large-10.columns
-    %p
-      %strong Some Person said:
-      Bacon food odor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.
-    %ul.inline-list
-      %li
-        %a{href: ""} Sweet
-      %li
-        %a{href: ""} Sour
-      %li
-        %b
-          %a{href: ""} Comment
-    %h6 2 Comments
-    .row
-      .large-2.columns.small-3
-        %img{src: "http://placehold.it/50x50&text=[img]"}/
-      .large-10.columns
-        %p Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit
-    .row
-      .large-2.columns.small-3
-        %img{src: "http://placehold.it/50x50&text=[img]"}/
-      .large-10.columns
-        %p Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit
+.large-7.columns
+  -@swits = Swit.all.order('created_at desc')
+  -if signed_in?
+    - @swits.each do |swit|
+      .row
+        .large-2.columns.small-3
+          %img{src: "http://placehold.it/80x80&text=[img]"}
+        .large-10.columns
+          %p
+            %strong
+              = swit.user.username
+              said:
+            = swit.content
+            %br
+            .timestamp
+            Posted 
+            = time_ago_in_words(swit.created_at)
+            ago.
+          %ul.inline-list
+            %li
+              %a{href: ""} Sweet
+            %li
+              %a{href: ""} Sour
+            %li
+              %b
+                %a{href: ""} Comment
+          -@comments = swit.comments.order('created_at desc')
+          %h6= "#{pluralize(swit.comments.count, "Comment")}:"
+          - @comments.each do |comment|
+            .row
+              .large-2.columns.small-3
+                %img{src: "http://placehold.it/50x50&text=[img]"}/
+                =comment.user.username
+              .large-10.columns
+                =comment.content
+            .timestamp
+            Posted 
+            = time_ago_in_words(comment.created_at)
+            ago.
+            %br
+            %br
+            %br
+          .row
+            .large-2.columns.small-3
+              %img{src: "http://placehold.it/50x50&text=[img]"}/
+            .large-10.columns
+              -@comment = Comment.new
+              = form_for @comment do |f|
+                - if @comment.errors.any?
+                  #error_explanation
+                    %h2= "#{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:"
+                    %ul
+                      - @comment.errors.full_messages.each do |msg|
+                        %li= msg
+
+                .field
+                  = f.label :content
+                  = f.text_area :content
+                .field
+                  = f.hidden_field :user_id, :value => swit.user_id
+                .field
+                  = f.hidden_field :swit_id, :value => swit.id
+                .actions
+                  = f.submit 'Comment'
+
+      %br
+      %hr
+

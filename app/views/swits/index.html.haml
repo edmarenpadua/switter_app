@@ -1,21 +1,38 @@
-%h1 Listing swits
-
-%table
-  %tr
-    %th Content
-    %th User
-    %th
-    %th
-    %th
-
+- content_for :logged_in do
   - @swits.each do |swit|
-    %tr
-      %td= swit.content
-      %td= swit.user_id
-      %td= link_to 'Show', swit
-      %td= link_to 'Edit', edit_swit_path(swit)
-      %td= link_to 'Destroy', swit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    .row
+      .large-2.columns.small-3
+        %img{src: "http://placehold.it/80x80&text=[img]"}/
+      .large-10.columns
+        %p
+          %strong
+          = swit.user.username
+          said:
+          = swit.content
+          %br
+          .timestamp
+          Posted 
+          = time_ago_in_words(swit.created_at)
+          ago.
+        %ul.inline-list
+          %li
+            %a{href: ""} Sweet
+          %li
+            %a{href: ""} Sour
+          %li
+            %b
+              %a{href: ""} Comment
+        %h6 2 Comments
+        .row
+          .large-2.columns.small-3
+            %img{src: "http://placehold.it/50x50&text=[img]"}/
+          .large-10.columns
+            %p Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit
+        .row
+          .large-2.columns.small-3
+            %img{src: "http://placehold.it/50x50&text=[img]"}/
+          .large-10.columns
+            %p Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit
+    %br
+    %hr
 
-%br
-
-= link_to 'Post a Swit', new_swit_path
