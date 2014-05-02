@@ -41,6 +41,8 @@ gem 'foundation-rails'
 #use Haml-rails
 gem 'haml-rails'
 
+#use thumbs_up
+gem 'thumbs_up'
 
 # Use ActiveModel has_secure_password
  gem 'bcrypt-ruby', '~> 3.1.2'

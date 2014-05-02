@@ -43,8 +43,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      user = User.find(params[:id]).authenticate(params[:old_password])
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to :root, notice: 'Password is changed.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

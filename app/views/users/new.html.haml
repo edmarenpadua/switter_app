@@ -1,8 +1,14 @@
 - content_for :index do
 	.row.large-7.columns
-		%h1 Switter.
-		%h4 Life is full of flavors.
-	.row.large-5.columns
+		%br
+		%br
+		%br
+		%br
+		%br
+		%br
+		%br
+		%h2 Life is full of flavors. ;)
+	#sign_up.row.large-5.columns
 		%h1 Sign Up
 		= render 'users/form'
 
@@ -28,9 +34,7 @@
 - content_for :header_logged_in do
 	%ul.inline-list.right
 		%li
-			Account Settings
+			-if signed_in?
+				= link_to 'Account Settings', edit_user_path(current_user)
 		%li
 			= link_to "Log out", signout_path, method: "delete"
-
-- content_for :feed do
-	%heellloo

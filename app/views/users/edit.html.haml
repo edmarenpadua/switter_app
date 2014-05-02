@@ -1,7 +1,35 @@
-%h1 Editing user
+- content_for :header_logged_in do
+  %ul.inline-list.right
+    %li
+      -if signed_in?
+        = link_to '<<Back', new_user_path
+    %li
+      = link_to "Log out", signout_path, method: "delete"
 
-= render 'form'
-
-= link_to 'Show', @user
-\|
-= link_to 'Back', users_path
+- content_for :logged_in do
+  #change.panel
+    %h3= "Change password for #{current_user.username}"
+    = form_for @user do |f|
+      - if @user.errors.any?
+        #error_explanation
+          %h2= "The form contains #{pluralize(@user.errors.count, "error")}"
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+      .field.small-9
+        = f.hidden_field :username, value: current_user.username
+      .field.small-9
+        = f.label :old_password, "Old Password"
+        = f.password_field :old_password
+      .field.small-9
+        = f.label :password, "New Password"
+        = f.password_field :password
+      .field.small-9
+        = f.label :password_confirmation, "Retype new password"
+        = f.password_field :password_confirmation
+      .actions
+        = f.submit 'Change password', class: "button success small radius center right" 
+      %br
+      %br
+      %br
+      %br

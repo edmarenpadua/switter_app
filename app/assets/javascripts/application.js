@@ -17,3 +17,9 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(document).ready(function() {
+  $("#swit_content").keyup(function() {
+  $("#counter").text(140 - $(this).val().length);
+  });
+});

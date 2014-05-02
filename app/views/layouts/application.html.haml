@@ -9,7 +9,7 @@
     = csrf_meta_tags
   %body
     = render 'layouts/header'
-    %div{id: "contain"}
+    #contain
       - flash.each do |key, value|
         %div{class: "alert alert-#{key}"}= value
       -if signed_in?

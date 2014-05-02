@@ -1,9 +1,11 @@
+%link{href: "http://fonts.googleapis.com/css?family=Tangerine", rel: "stylesheet", type: "text/css"}
 .row
 	.large-12.columns
-		.panel
+		#head.panel
 			-if signed_in?
 				=yield :header_logged_in
 			-else
 				= yield	:header_index	
 			.title
-				%h1 Switter
+				%strong{style: "font-family: Tangerine, Serif; font-size: 75px"} Switter
+			%br

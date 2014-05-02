@@ -1,25 +1,30 @@
 .large-3.columns
-  .panel
-    %a{href: "#"}
-      %img{src: "http://placehold.it/100x100&text=[img]"}/
-    %h5
-      %b
-        -if signed_in?
+  #sideFeed.panel
+    -if signed_in?
+      %a{href: "#"}
+        %img{src: "http://placehold.it/180x180&text=[#{current_user.username}]"}/
+      %h5
+        %b
           = current_user.username
-    %br
-    %h6 Post a Swit:
-    -@swit = Swit.new
-    = form_for @swit do |f|
-      - if @swit.errors.any?
-        #error_explanation
-          %h2= "#{pluralize(@swit.errors.count, "error")} prohibited this swit from being saved:"
-          %ul
-            - @swit.errors.full_messages.each do |msg|
-              %li= msg
-      -if signed_in?
-        .field
-          = f.text_area :content
-        .field
-          = f.hidden_field :user_id, value: current_user.id
-        .actions
-          = f.submit 'Save'
+      %br
+      -@swit = Swit.new
+      = form_for @swit do |f|
+        - if @swit.errors.any?
+          #error_explanation
+            %h2= "#{pluralize(@swit.errors.count, "error")} prohibited this swit from being saved:"
+            %ul
+              - @swit.errors.full_messages.each do |msg|
+                %li= msg
+        -if signed_in?
+          #post_swit.field
+            = f.text_area :content, maxlength: 140, placeholder: "Post a Swit..", rows: 7, resize: false
+          %div
+            Characters left:
+            %strong
+              %span#counter 140
+          .field
+            = f.hidden_field :user_id, value: current_user.id
+          .actions
+            = f.submit 'Post', class: "button success tiny radius center right"
+          %br
+          %br

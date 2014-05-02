@@ -1,6 +1,7 @@
 class SwitsController < ApplicationController
   before_action :set_swit, only: [:show, :edit, :update, :destroy]
 
+
   # GET /swits
   # GET /swits.json
   def index
@@ -58,6 +59,24 @@ class SwitsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to swits_url }
       format.json { head :no_content }
+    end
+  end
+
+  def vote_up
+    begin
+      current_user.vote_exclusively_for(@swit = Swit.find(params[:id]))
+      redirect_to :root
+    rescue ActiveRecord::RecordInvalid
+      render :nothing => true, :status => 404
+    end
+  end
+
+  def vote_down
+    begin
+      current_user.vote_exclusively_against(@swit = Swit.find(params[:id]))
+      redirect_to :root
+    rescue ActiveRecord::RecordInvalid
+      render :nothing => true, :status => 404
     end
   end
 

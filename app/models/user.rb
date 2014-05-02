@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	acts_as_voter
 	has_many :swits
 	has_many :comments
 	before_create :create_remember_token
